@@ -1,0 +1,150 @@
+<html>
+<title>MTA Machine</title>
+<style>
+	html, body, div, span, applet, object, iframe,
+	h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+	a, abbr, acronym, address, big, cite, code,
+	del, dfn, em, img, ins, kbd, q, s, samp,
+	small, strike, strong, sub, sup, tt, var,
+	b, u, i, center,
+	dl, dt, dd, ol, ul, li,
+	fieldset, form, label, legend,
+	table, caption, tbody, tfoot, thead, tr, th, td,
+	article, aside, canvas, details, embed, 
+	figure, figcaption, footer, header, hgroup, 
+	menu, nav, output, ruby, section, summary,
+	time, mark, audio, video {
+		
+		margin: 0;
+		padding: 0;
+		border: 0;
+		font-size: 100%;
+		font: inherit;
+		vertical-align: baseline;
+	}
+	button{
+		place-self: center;
+	}
+</style>
+<body>
+	<div id='container1'>
+		<button type='button' id='startButton'>Start</button>
+	</div>
+	<div id='container2'>
+		<button type='button' class='level2' id='chooseLanguageButton' style='display:none;'>English</button>
+		<button type='button' class='level2' style='display:none;' disabled>Français</button>
+		<button type='button' class='level2' style='display:none;' disabled>Español</button>
+		<button type='button' class='level2' style='display:none;' disabled>中文</button>
+		<button type='button' class='level2' style='display:none;' disabled>한글</button>
+	</div>
+	<div id='container3'>
+		<button type='button' class='level3' id='SmartlinkButton' style='display:none;'>Smartlink</button>
+		<button type='button' class='level3' id='PATHSingleRideButton' style='display:none;'>PATH Single Ride</button>
+		<button type='button' class='level3' id='METROButton' style='display:none;'>METRO</button>
+	</div>
+	<div id='container4'>
+		<button type='button' class='level4' id='RefillButton' style='display:none;'>Refill</button>
+		<button type='button' class='level4' id='CardInfoButton' style='display:none;'>Card Info</button>
+		<button type='button' class='level4' id='NewButton' style='display:none;'>New</button>
+	</div>
+	<div id='container5'>
+		<button type='button' id='CardInfo' style='display:none;'>0 Trip(s) Available!</button>
+		<p  id='OneRide' style='display:none;'>Pay $2.75</p>
+		<button type='button' class='level5' id='CashButton' style='display:none;'>Cash</button>
+		<button type='button' class='level5' id='ATMCardButton' style='display:none;'>ATM Card</button>
+		<button type='button' class='level5' id='CreditCardButton' style='display:none;'>Credit Card</button>
+
+	</div>
+	<div id='container6'>
+		<p class='level6' id='Receipt' style='display:none;'>Receipt?</p>
+		<button type='button' class='level6' id='YesButton' style='display:none;' disabled>Yes</button>
+		<button type='button' class='level6' id='NoButton' style='display:none;'>No</button>
+	</div>
+	<div id='container7'>
+		<p class='level8' id='ThankYou' style='display:none;'>Thank You</p>
+		<button type='button' class='level8' id='ReturnButton' style='display:none;'>Return to Start</button>
+	</div>
+</body>
+<script>
+	document.body.setAttribute('style','display:grid; grid-template-columns: 1fr; grid-template-rows:repeat(7,1fr);');
+	for(var i=0; i<7; i+=1){
+		document.getElementById('container'+(i+1)).setAttribute('style', 'grid-column:1 / 2; grid-row: '+(i+1)+' / '+(i+2)+'; display:flex; flex-direction:row; justify-content:center; align-items:center');
+	}
+	document.getElementById('startButton').onclick = function(){
+		document.getElementById('startButton').setAttribute('disabled','');
+		var allLevel2 = document.getElementsByClassName('level2');
+		for (var i=0; i<allLevel2.length; i+=1){
+  			allLevel2[i].style.display = 'block';
+		}
+
+	}
+	document.getElementById('chooseLanguageButton').onclick = function(){
+		document.getElementById('chooseLanguageButton').setAttribute('disabled','');
+		var allLevel3 = document.getElementsByClassName('level3');
+		for (var i=0; i<allLevel3.length; i+=1){
+  			allLevel3[i].style.display = 'block';
+		}
+	}
+	document.getElementById('SmartlinkButton').onclick = function(){
+		document.getElementById('METROButton').setAttribute('disabled','');
+		document.getElementById('PATHSingleRideButton').setAttribute('disabled','');
+		var allLevel4 = document.getElementsByClassName('level4');
+		for (var i=0; i<allLevel4.length-1; i+=1){
+  			allLevel4[i].style.display = 'block';
+		}
+	}
+	document.getElementById('METROButton').onclick = function(){
+		document.getElementById('SmartlinkButton').setAttribute('disabled','');
+		document.getElementById('PATHSingleRideButton').setAttribute('disabled','');
+		var allLevel4 = document.getElementsByClassName('level4');
+		for (var i=0; i<allLevel4.length; i+=1){
+  			allLevel4[i].style.display = 'block';
+		}
+	}
+	document.getElementById('CardInfoButton').onclick = function(){
+		document.getElementById('CardInfo').style.display = 'block';
+	}
+	document.getElementById('RefillButton').setAttribute('onClick', 'pay();');
+	document.getElementById('PATHSingleRideButton').setAttribute('onClick', 'pay();');
+
+	function pay (){
+		document.getElementById('CardInfoButton').setAttribute('disabled','');
+		document.getElementById('NewButton').setAttribute('disabled','');
+		document.getElementById('CardInfo').style.display = 'none';
+		document.getElementById('OneRide').style.display = 'block';
+		var allLevel5 = document.getElementsByClassName('level5');
+		for (var i=0; i<allLevel5.length; i+=1){
+  			allLevel5[i].style.display = 'block';
+		}
+	}
+	document.getElementById('NewButton').onclick = function(){
+		document.getElementById('CardInfoButton').setAttribute('disabled','');
+		document.getElementById('RefillButton').setAttribute('disabled','');
+		document.getElementById('CardInfo').style.display = 'none';
+		document.getElementById('OneRide').innerHTML = 'Pay $3.75';
+		document.getElementById('OneRide').style.display = 'block';
+		var allLevel5 = document.getElementsByClassName('level5');
+		for (var i=0; i<allLevel5.length; i+=1){
+  			allLevel5[i].style.display = 'block';
+		}
+	}
+	document.getElementById('CashButton').setAttribute('onClick', 'receipt("ATMCardButton", "CreditCardButton")');
+	document.getElementById('ATMCardButton').setAttribute('onClick', 'receipt("CashButton", "CreditCardButton")');
+	document.getElementById('CreditCardButton').setAttribute('onClick', 'receipt("CashButton", "ATMCardButton")');
+	function receipt(index, index2){
+		document.getElementById(index).setAttribute('disabled','');
+		document.getElementById(index2).setAttribute('disabled','');
+		var allLevel6 = document.getElementsByClassName('level6');
+		for (var i=0; i<allLevel6.length; i+=1){
+  			allLevel6[i].style.display = 'block';
+		}
+	}
+	document.getElementById('NoButton').onclick = function(){
+		document.getElementById('ReturnButton').style.display = 'block';
+	}
+	document.getElementById('ReturnButton').onclick = function(){
+		location.reload();
+	}
+
+</script>
+</html>

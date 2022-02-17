@@ -1,0 +1,99 @@
+<html>
+<title>Class 2 Exercise</title>
+<body>
+	<div id='ex1'>
+		<h3>1.Conditions</h3>
+		<p id='ex1Answer'> </p>
+	</div>
+	<div id='ex2'>
+		<h3>2.Conditions/Random</h3>
+		<p id='ex2Answer'> </p>
+	</div>
+	<div id='ex3'>
+		<h3>3. Loops:</h3>
+		<p id='ex3Answer'></p>
+	</div>
+	<div id='ex4'>
+		<h3>4. Loops:</h3>
+		<p id='ex4Answer'> </p>
+	</div>
+	<div id='ex5'>
+		<h3>5. Loops:</h3>
+		<p id='ex5Answer'> </p>
+	</div>
+	<div id='ex6'>
+		<h3>6. Loops and Conditions:</h3>
+		<p id='ex6Answer'> </p>
+	</div>
+</body>
+<script>
+	// 1
+	var n = Math.floor(Math.random()*12);
+	console.log(n%2);
+	if(!(n%2)){
+		// when it is 0
+		document.getElementById('ex1Answer').innerHTML = n + ' is even';
+	} else if(n%2){
+		// when it is 1 
+		document.getElementById('ex1Answer').innerHTML = n + ' is odd'
+	}
+
+	// 2 
+	var dice = Math.floor(Math.random()*6)+1;
+	switch(dice){
+		case 1:
+			document.getElementById('ex2Answer').innerHTML = 'You rolled ' + dice + '!';
+			break;
+		case 2:
+			document.getElementById('ex2Answer').innerHTML = 'You rolled ' + dice + '!';
+			break;
+		case 3:
+			document.getElementById('ex2Answer').innerHTML = 'You rolled ' + dice + '!';
+			break;
+		case 4:
+			document.getElementById('ex2Answer').innerHTML = 'You rolled ' + dice + '!';
+			break;
+		case 5:
+			document.getElementById('ex2Answer').innerHTML = 'You rolled ' + dice + '!';
+			break;
+		case 6:
+			document.getElementById('ex2Answer').innerHTML = 'You rolled ' + dice + '!';
+			break;
+	}
+
+	// 3
+	// var roll;
+	// do{
+	// 	var roll = Math.floor(Math.random()*6)+1;
+	// 	var result = document.createElement('p');
+	// 	roll<3 ? result.innerHTML = 'You rolled ' + roll + '. Try again.' : result.innerHTML = 'Yay! You rolled ' + roll + '.'
+	// 	// result.innerHTML = roll;
+	// 	document.getElementById('ex3Answer').appendChild(result);
+	// }
+	// while(3<roll);
+
+	// 4
+	var result = 1;
+	for(var i=1; i<11; i+=1){
+		result = result*i
+	}
+	document.getElementById('ex4Answer').innerHTML = result;
+	
+	// 5
+	for(var i=1; i<11; i+=1){
+		var build = document.createElement('p');
+		build.innerHTML = '*'.repeat(i);
+		document.getElementById('ex5Answer').appendChild(build);
+	}
+
+	//6
+	for(var i=0; i<4; i+=1){
+		var row1 = document.createElement('p');
+		row1.innerHTML = '&#x025FC;&#x025FB;'.repeat(4);
+		var row2 = document.createElement('p');
+		row2.innerHTML = '&#x025FB;&#x025FC;'.repeat(4);
+		document.getElementById('ex6Answer').appendChild(row1);
+		document.getElementById('ex6Answer').appendChild(row2);
+	}
+</script>
+</html>
