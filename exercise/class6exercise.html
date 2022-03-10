@@ -1,0 +1,145 @@
+<html>
+<title>Class 6: Exercises</title>
+<style>
+	h1,p,label{
+		margin:0; padding:0;
+	}
+	#requiredMessage{
+		color:#ff0000;
+		display: none;
+	}
+</style>
+<body>
+	<form name="search" action="https://www.google.com/search" id="searchForm" method="GET">
+
+    	<label for="searchType">What do you want to ask me?</label>
+    	<select name="searchType" id="searchType">
+    	    <option value="mood">How are you?</option>
+    	    <option value="plan">Any plans today?</option>
+    	</select>
+    	<br>
+	
+    	<label>Weather today is</label>
+    	<label><input type="radio" name="searchScope" value="sunny">Sunny</label>
+    	<label><input type="radio" name="searchScope" value="cloudy">Cloudy</label>
+    	<label><input type="radio" name="searchScope" value="raining">Raining</label>
+    	<label><input type="radio" name="searchScope" value="snowing" >Snowing</label>
+    	<br>
+    	<p id='requiredMessage'>Please tell me the weather today</p>
+    	<button type="submit">Ask</button>
+    	<h1 id='answer'></h1>
+    </form>
+</body>
+<script>
+	//1
+	console.log('—————EXERCISE 1—————');
+	var p = 'hello there';
+	var reversed = '';
+	for(var i=0; i<p.length; i+=1){
+		reversed += p[ ( p.length-1 )- i];
+	}
+	console.log(p);
+	console.log(reversed);
+
+	//2
+	console.log('—————EXERCISE 2—————');
+	function check2(index){
+		var test = '';
+		for(var i=0; i<index.length; i+=1){
+			test += index[ ( index.length-1 )- i];
+		}
+		(test === index) ? console.log(`${index} is a palindrome.`) : console.log(`${index} is not a palindrome.`)
+	}
+	check2('kayak');
+	check2('hello');
+
+	//3
+	console.log('—————EXERCISE 3—————');
+	function check3(index){
+		(index%4) ? console.log(`year ${index} is not a leap year`) : console.log(`year ${index} is a leap year`)
+	}
+	check3(2020);
+	check3(2021);
+	check3(2022);
+	check3(2023);
+	check3(2024);
+	check3(2025);
+
+	//4
+	console.log('—————EXERCISE 4—————');
+	function check4(index) { 
+		var str = index.replace(/[^a-zA-Z0-9\s]/g,'');
+		var filter = str.split(' ');
+		var empty = [];
+		filter.forEach(letter => {
+  			if(letter === '') empty.push(letter);
+		})
+  		console.log(`"${index}" has ${filter.length-empty.length} words`);
+	}
+	check4("My name is !@#$%^ & * Eddie Kim");
+
+	//5
+	// console.log('—————EXERCISE 5—————');
+	var qAndA = {
+		mood:{
+			'sunny':[
+				'Feeling Happy'
+			],
+			'cloudy':[
+				'Im alright', 
+				'Im okay', 
+			],
+			'raining':[
+				'Forgot my umbrella',
+				'Not doing great'
+			],
+			'snowing':[
+				'Forgot my gloves',
+				'Its cold'
+			]
+		},
+		plan:{
+			'sunny':[
+				'Going out today'
+			],
+			'cloudy':[
+				'Might go out but ill bring my umbrella' 
+			],
+			'raining':[
+				'Staying home all day'
+			],
+			'snowing':[
+				'No way Im going out today'
+			]
+		}
+	}
+	var form = document.querySelector('form');
+	form.addEventListener('submit', function(e){
+	// this is where u can check the submitted data
+		e.preventDefault();
+		const questions = [];
+		const data = new FormData(this);
+
+		for (let fields of data.entries() ) {
+			questions.push(fields);
+			// console.log(questions);
+		}
+
+		if(questions.length===1){
+			document.getElementById('requiredMessage').style.display = 'block';
+		}else{
+			document.getElementById('requiredMessage').style.display = 'none';
+			var type = questions[0][1];
+			var weather = questions[1][1];
+			answer(type, weather);
+		}
+	});
+	function answer(type, weather){
+		// document.getElementById('requiredMessage').style.display = 'none';
+		var search = qAndA[type][weather];
+		var print = document.getElementById('answer');
+		print.innerHTML = search[Math.floor(Math.random()*search.length)];
+	}
+
+</script>
+</html>
